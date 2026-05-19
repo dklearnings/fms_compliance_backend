@@ -1,0 +1,31 @@
+openapi: 3.0.3
+
+info:
+  title: Fleet Compliance API
+  version: 1.0.0
+
+paths:
+
+  /drivers:
+    post:
+      summary: Create driver
+
+  /drivers/{driver_id}/activity:
+    post:
+      summary: Submit activity record
+
+  /drivers/{driver_id}/compliance-check:
+    post:
+      summary: Run compliance check
+
+  /drivers/{driver_id}/compliance-runs/{run_id}:
+    get:
+      summary: Get compliance run
+
+  /drivers/{driver_id}/violations:
+    get:
+      summary: Get violations
+
+  /health:
+    get:
+      summary: Health check
