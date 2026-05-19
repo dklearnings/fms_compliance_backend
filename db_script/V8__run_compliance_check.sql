@@ -48,7 +48,9 @@ BEGIN
         p_period_start,
         p_period_end,
         'RUNNING'
-    );
+    )
+    ON CONFLICT (run_id) DO NOTHING;
+
 
     -- =====================================================
     -- RULE 1:
