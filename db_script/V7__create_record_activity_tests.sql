@@ -4,10 +4,10 @@
 
 BEGIN;
 
-TRUNCATE activity_records CASCADE;
-TRUNCATE drivers CASCADE;
-TRUNCATE vehicles CASCADE;
-TRUNCATE fleet_operators CASCADE;
+TRUNCATE fms.activity_records CASCADE;
+TRUNCATE fms.drivers CASCADE;
+TRUNCATE fms.vehicles CASCADE;
+TRUNCATE fms.fleet_operators CASCADE;
 
 -- =========================================================
 -- Seed data
