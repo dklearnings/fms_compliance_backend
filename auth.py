@@ -1,7 +1,10 @@
 from fastapi import Header, HTTPException
+import os
 
-API_KEY = "my-secret-key"
-
+API_KEY: str = os.getenv(
+        "API_KEY",
+        ""
+    )
 
 def verify_api_key(x_api_key: str = Header(...)):
 
