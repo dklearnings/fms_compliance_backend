@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS fms.vehicles
     registration_plate VARCHAR(50) NOT NULL,
     make VARCHAR(100) NOT NULL,
     model VARCHAR(100) NOT NULL,
-	fleet_operator_id UUID NOT NULL fms.fleet_operators(fleet_operator_id),
+	fleet_operator_id UUID NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,    
     CONSTRAINT pk_vehicles_vehicle_id PRIMARY KEY (vehicle_id),
 	CONSTRAINT uk_vehicles_vin UNIQUE (vin),
