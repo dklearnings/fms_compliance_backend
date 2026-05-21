@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS fms.drivers
 
 -- =============================================
 -- Vehicles
+-- Modified by Debasish on 2024-06-20
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS fms.vehicles
