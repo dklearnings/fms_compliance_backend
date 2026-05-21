@@ -29,7 +29,7 @@ async def create_driver(
 
             cur.execute(
                 """
-                INSERT INTO drivers
+                INSERT INTO fms.drivers
                 (
                     full_name,
                     license_number,

@@ -38,7 +38,7 @@ async def submit_activity_record(
                 cur.execute(
                     """
                     SELECT *
-                    FROM create_activity_record(
+                    FROM fms.fn_create_activity_record(
                         %s,
                         %s,
                         %s,
