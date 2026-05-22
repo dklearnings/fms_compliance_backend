@@ -92,7 +92,7 @@ BEGIN
         total_seconds,
         32400,
         p_run_id
-    FROM fms.daily_driving
+    FROM daily_driving
     WHERE total_seconds > 32400;
 
     -- =====================================================
