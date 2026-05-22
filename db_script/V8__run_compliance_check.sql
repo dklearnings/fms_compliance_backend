@@ -187,21 +187,53 @@ BEGIN
 
     -- =====================================================
     -- RULE 4:
-    -- Continuous driving without qualifying break
-    -- Simplified implementation
+    -- Continuous driving without qualifying break (4.5 hours)
+    -- Detects contiguous driving spans using gap detection
     -- =====================================================
 
-    WITH ordered_events AS
+    WITH ordered_driving AS
+    (
+        SELECT
+            record_id,
+            driver_id,
+            started_at,
+            ended_at,
+            duration_seconds,
+            activity_type,
+            LAG(ended_at)
+                OVER (ORDER BY started_at) AS prev_ended_at,
+            CASE
+                WHEN LAG(activity_type)
+                    OVER (ORDER BY started_at) = 'DRIVING'
+                    AND (EXTRACT(EPOCH FROM (started_at - LAG(ended_at)
+                        OVER (ORDER BY started_at))) / 60) <= 15
+                THEN 0
+                ELSE 1
+            END AS is_new_group
+        FROM fms.activity_records
+        WHERE driver_id = p_driver_id
+          AND activity_type = 'DRIVING'
+          AND started_at >= p_period_start
+          AND ended_at <= p_period_end
+    ),
+    driving_groups AS
     (
         SELECT
             *,
-            LAG(activity_type)
-            OVER (ORDER BY started_at)
-            AS prev_type
-        FROM fms.activity_records
-        WHERE driver_id = p_driver_id
-          AND started_at >= p_period_start
-          AND ended_at <= p_period_end
+            SUM(is_new_group)
+                OVER (ORDER BY started_at) AS group_id
+        FROM ordered_driving
+    ),
+    continuous_spans AS
+    (
+        SELECT
+            group_id,
+            MIN(started_at) AS span_start,
+            MAX(ended_at) AS span_end,
+            SUM(duration_seconds) AS total_driving_seconds
+        FROM driving_groups
+        GROUP BY group_id
+        HAVING SUM(duration_seconds) > 16200
     )
     INSERT INTO fms.compliance_violations
     (
@@ -218,15 +250,12 @@ BEGIN
         p_driver_id,
         'EXCESS_CONTINUOUS_DRIVING',
         'HIGH',
-        MIN(started_at),
-        MAX(ended_at),
-        SUM(duration_seconds),
+        span_start,
+        span_end,
+        total_driving_seconds,
         16200,
         p_run_id
-    FROM ordered_events
-    WHERE activity_type = 'DRIVING'
-    GROUP BY prev_type
-    HAVING SUM(duration_seconds) > 16200;
+    FROM continuous_spans;
 
     -- =====================================================
     -- Mark completed
