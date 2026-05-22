@@ -25,3 +25,21 @@ class ComplianceRunResponse(BaseModel):
     period_end: datetime
     violations_found: int
     violation_summary: List[ViolationSummary]
+
+
+class ViolationDetail(BaseModel):
+    violation_id: UUID
+    driver_id: UUID
+    violation_type: str
+    severity: str
+    period_start: datetime
+    period_end: datetime
+    measured_value_seconds: int
+    threshold_seconds: int
+    detection_run_id: UUID
+
+
+class ViolationsListResponse(BaseModel):
+    violations: List[ViolationDetail]
+    cursor: Optional[str] = None
+    has_more: bool
