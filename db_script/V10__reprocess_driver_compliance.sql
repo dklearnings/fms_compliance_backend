@@ -147,7 +147,7 @@ BEGIN
         SELECT
             date_trunc('week', started_at) AS week_start,
             SUM(duration_seconds) AS total_seconds
-        FROM activity_records
+        FROM fms.activity_records
         WHERE driver_id = p_driver_id
           AND activity_type = 'DRIVING'
           AND started_at >= p_period_start
@@ -223,7 +223,7 @@ BEGIN
     -- Delete ONLY AFTER successful recomputation
     -- =====================================================
 
-    DELETE FROM compliance_violations
+    DELETE FROM fms.compliance_violations
     WHERE driver_id = p_driver_id
       AND period_start >= p_period_start
       AND period_end <= p_period_end;
