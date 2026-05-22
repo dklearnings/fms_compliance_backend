@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi import Request
 from fastapi.responses import JSONResponse
+import logging
 
 from psycopg.errors import DatabaseError
 
@@ -8,6 +9,9 @@ from app.database import pool
 from app.models.activity import (
     SubmitActivityRequest
 )
+from app.logger_config import get_logger
+
+logger = get_logger(__name__)
 
 router = APIRouter()
 
@@ -108,6 +112,20 @@ async def submit_activity_record(
                 }
             )
 
+        logger.error(f"Unhandled database error (sqlstate: {sqlstate}) in submit_activity_record. Correlation ID: {correlation_id}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "type": "https://example.com/errors/internal",
+                "title": "Internal Server Error",
+                "status": 500,
+                "detail": f"Correlation ID: {correlation_id}",
+                "instance": str(request.url)
+            }
+        )
+    
+    except Exception as ex:
+        logger.error(f"Unexpected error in submit_activity_record. Correlation ID: {correlation_id}", exc_info=True)
         return JSONResponse(
             status_code=500,
             content={
