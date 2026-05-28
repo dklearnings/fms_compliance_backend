@@ -19,3 +19,6 @@ ADD COLUMN error_message TEXT;
 
 ALTER TABLE fms.compliance_runs
 ADD COLUMN superseded_run_id UUID;
+
+ALTER TABLE fms.compliance_runs
+ADD COLUMN status varchar(100);

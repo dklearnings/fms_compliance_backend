@@ -1,15 +1,16 @@
 from fastapi import APIRouter
 from fastapi import Request
+from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 import logging
 
 from psycopg.errors import DatabaseError
 
-from app.database import pool
-from app.models.activity import (
+from database import pool
+from models.activity import (
     SubmitActivityRequest
 )
-from app.logger_config import get_logger
+from logger_config import get_logger
 
 logger = get_logger(__name__)
 
@@ -34,11 +35,10 @@ async def submit_activity_record(
     )
 
     try:
-
         with pool.connection() as conn:
 
             with conn.cursor() as cur:
-
+                
                 cur.execute(
                     """
                     SELECT *
@@ -74,12 +74,12 @@ async def submit_activity_record(
         if row[2]:
             return JSONResponse(
                 status_code=200,
-                content=response_body
+                content=jsonable_encoder(response_body)
             )
 
         return JSONResponse(
             status_code=201,
-            content=response_body
+            content=jsonable_encoder(response_body)
         )
 
     except DatabaseError as ex:

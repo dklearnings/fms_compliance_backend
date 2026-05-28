@@ -1,9 +1,7 @@
 from fastapi import FastAPI
-from app.middleware.correlation import CorrelationIdMiddleware
-from app.routers import drivers
-from app.routers import activities
-from app.routers import compliance
-from app.routers import health
+from middleware.correlation import CorrelationIdMiddleware
+from routers import drivers, activities, compliance, health
+
 
 app = FastAPI(
     title="Fleet Compliance API",
@@ -12,7 +10,12 @@ app = FastAPI(
 
 app.add_middleware(CorrelationIdMiddleware)
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Fleet Compliance API!"}
+
 app.include_router(drivers.router)
 app.include_router(activities.router)
 app.include_router(compliance.router)
 app.include_router(health.router)
+

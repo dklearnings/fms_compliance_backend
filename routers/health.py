@@ -6,8 +6,8 @@ from psycopg.errors import DatabaseError
 from pydantic import BaseModel
 from typing import Optional
 
-from app.database import pool
-from app.logger_config import get_logger
+from database import pool
+from logger_config import get_logger
 
 logger = get_logger(__name__)
 

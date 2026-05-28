@@ -2,12 +2,12 @@ from fastapi import APIRouter
 from fastapi import Request
 from fastapi import status
 
-from app.models.driver import (
+from models.driver import (
     CreateDriverRequest,
     CreateDriverResponse
 )
 
-from app.database import pool
+from database import pool
 
 router = APIRouter()
 

@@ -7,15 +7,15 @@ from psycopg.errors import DatabaseError
 from typing import Optional
 import base64
 
-from app.database import pool
-from app.models.compliance import (
+from database import pool
+from models.compliance import (
     ComplianceCheckRequest,
     ComplianceRunResponse,
     ViolationSummary,
     ViolationDetail,
     ViolationsListResponse
 )
-from app.logger_config import get_logger
+from logger_config import get_logger
 
 logger = get_logger(__name__)
 
@@ -48,6 +48,7 @@ def execute_compliance(
             )
 
             conn.commit()
+            conn.close()
 
 
 @router.post(
@@ -385,12 +386,3 @@ async def list_violations(
             }
         )
 
-
-# Sample GET API endpoint
-@router.get("/compliance/sample", status_code=200)
-async def get_sample_compliance():
-    """
-    Sample GET endpoint for compliance.
-    Returns a simple message.
-    """
-    return {"message": "This is a sample GET API for compliance."}

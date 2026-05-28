@@ -1,2 +1,23 @@
-2026-05-18 13:09:56,011 INFO Product created: Laptop
-2026-05-18 13:13:04,583 INFO Order created for customer=John
+2026-05-27 09:20:09,792 WARNING discarding closed connection: <psycopg.Connection [BAD] at 0x215f6942210>
+2026-05-27 10:06:54,995 WARNING couldn't stop thread 'pool-1-worker-0' within 5.0 seconds
+2026-05-27 10:06:54,996 WARNING hint: you can try to call 'close()' explicitly or to use the pool as context manager
+2026-05-27 10:07:12,106 WARNING discarding closed connection: <psycopg.Connection [BAD] at 0x18bac9841a0>
+2026-05-27 11:25:56,948 WARNING discarding closed connection: <psycopg.Connection [BAD] at 0x18bac882490>
+2026-05-28 11:55:30,297 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:55:30,298 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:55:30,298 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:57:40,691 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:57:41,349 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:57:41,350 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:59:50,940 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:59:51,816 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 11:59:53,337 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 12:02:01,296 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 12:02:01,297 WARNING reconnection attempt in pool 'pool-1' failed after 300.0 sec
+2026-05-28 12:02:02,953 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 12:02:02,954 WARNING reconnection attempt in pool 'pool-1' failed after 300.0 sec
+2026-05-28 12:02:04,033 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 12:04:11,711 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 12:04:11,711 WARNING reconnection attempt in pool 'pool-1' failed after 300.0 sec
+2026-05-28 12:04:18,751 WARNING error connecting in 'pool-1': connection timeout expired
+2026-05-28 12:04:18,751 WARNING reconnection attempt in pool 'pool-1' failed after 300.0 sec

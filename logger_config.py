@@ -7,3 +7,10 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger("fms-api")
+
+
+def get_logger(name: str | None = None):
+    """Return a logger. If `name` is provided, return a named logger."""
+    if name:
+        return logging.getLogger(name)
+    return logger

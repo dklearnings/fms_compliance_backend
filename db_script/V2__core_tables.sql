@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS  fms.activity_records
 CREATE TABLE IF NOT EXISTS fms.compliance_runs
 (
     run_id UUID NOT NULL DEFAULT gen_random_uuid(),
-    driver_id UUID NOT NULL REFERENCES drivers(driver_id),
+    driver_id UUID NOT NULL,
     triggered_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     period_start TIMESTAMPTZ NOT NULL,
     period_end TIMESTAMPTZ NOT NULL,
